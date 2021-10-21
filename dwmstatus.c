@@ -17,6 +17,8 @@
 
 #include <X11/Xlib.h>
 
+#include <curl/curl.h>
+
 char *tzutc = "UTC";
 char *tzct  = "America/Menominee";
 
@@ -159,8 +161,6 @@ char *gettemperature(char *base, char *sensor) {
 int main(void) {
   char *status;
   char *avgs;
-  char *bat;
-  char *bat1;
   char *tmutc;
   char *tmct;
   char *t0, *t1, *t2;
@@ -172,24 +172,20 @@ int main(void) {
 
   for (;; sleep(60)) {
     avgs = loadavg();
-    bat = getbattery("/sys/class/power_supply/BAT0");
-    bat1 = getbattery("/sys/class/power_supply/BAT1");
     tmutc = mktimes("%H:%M", tzutc);
     tmct = mktimes("KW %W %a %d %b %H:%M %Z %Y", tzct);
     t0 = gettemperature("/sys/devices/virtual/hwmon/hwmon0", "temp1_input");
     t1 = gettemperature("/sys/devices/virtual/hwmon/hwmon2", "temp1_input");
     t2 = gettemperature("/sys/devices/virtual/hwmon/hwmon4", "temp1_input");
 
-    status = smprintf(" T:%s|%s|%s L:%s B:%s|%s  U:%s %s", 
-                          t0,t1,t2,  avgs,bat,bat1,tmutc,tmct);
+    status = smprintf(" T:%s|%s|%s L:%s  UTC:%s %s", 
+                          t0,t1,t2,  avgs, tmutc,tmct);
     setstatus(status);
 
     free(t0);
     free(t1);
     free(t2);
     free(avgs);
-    free(bat);
-    free(bat1);
     free(tmutc);
     free(tmct);
     free(status);
