@@ -1,4 +1,4 @@
-NAME = dwmstatus
+NAME = testwservice
 VERSION = 1.0
 
 # Customize below to fit your system
@@ -7,25 +7,17 @@ VERSION = 1.0
 PREFIX = /usr
 MANPREFIX = ${PREFIX}/share/man
 
-X11INC = /usr/X11R6/include
-X11LIB = /usr/X11R6/lib
 CURLINC = /usr/local/include
 CURLLIB = /usr/local/lib
 
 # includes and libs
-INCS = -I. -I/usr/include -I${X11INC} -I${CURLINC}
-LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 -L${CURLLIB} -lcurl
+INCS = -I. -I/usr/include -I${CURLINC}
+LIBS = -L/usr/lib -lc -L${CURLLIB} -lcurl -ljansson
 
 # flags
 CPPFLAGS = -DVERSION=\"${VERSION}\" -D_DEFAULT_SOURCE
 CFLAGS = -g -std=c99 -pedantic -Wall -O0 ${INCS} ${CPPFLAGS}
-#CFLAGS = -std=c99 -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
 LDFLAGS = -g ${LIBS}
-#LDFLAGS = -s ${LIBS}
-
-# Solaris
-#CFLAGS = -fast ${INCS} -DVERSION=\"${VERSION}\"
-#LDFLAGS = ${LIBS}
 
 # compiler and linker
 CC = gcc

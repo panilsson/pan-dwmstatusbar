@@ -11,16 +11,16 @@ options:
 	@echo ${NAME} build options:
 	@echo "CFLAGS   = ${CFLAGS}"
 	@echo "LDFLAGS  = ${LDFLAGS}"
-	@echo "CC       = ${CC}"
+	@echo "GCC      = ${CC}"
 
 .c.o:
-	@echo CC $<
+	@echo GCC $<
 	@${CC} -c ${CFLAGS} $<
 
 ${OBJ}: config.mk
 
 ${NAME}: ${OBJ}
-	@echo CC -o $@
+	@echo GCC -o $@
 	@${CC} -o $@ ${OBJ} ${LDFLAGS}
 
 clean:
