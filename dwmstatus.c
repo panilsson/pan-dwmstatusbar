@@ -16,8 +16,8 @@
 #include <unistd.h>
 
 #include <X11/Xlib.h>
-
 #include <curl/curl.h>
+#include <weather/weather.h>
 
 char *tzutc = "UTC";
 char *tzct  = "America/Menominee";
@@ -163,7 +163,6 @@ int main(void) {
   char *avgs;
   char *tmutc;
   char *tmct;
-  char *t0, *t1, *t2;
 
   if (!(dpy = XOpenDisplay(NULL))) {
     fprintf(stderr, "dwmstatus: cannot open display.\n");
@@ -174,17 +173,11 @@ int main(void) {
     avgs = loadavg();
     tmutc = mktimes("%H:%M", tzutc);
     tmct = mktimes("KW %W %a %d %b %H:%M %Z %Y", tzct);
-    t0 = gettemperature("/sys/devices/virtual/hwmon/hwmon0", "temp1_input");
-    t1 = gettemperature("/sys/devices/virtual/hwmon/hwmon2", "temp1_input");
-    t2 = gettemperature("/sys/devices/virtual/hwmon/hwmon4", "temp1_input");
 
-    status = smprintf(" T:%s|%s|%s L:%s  UTC:%s %s", 
-                          t0,t1,t2,  avgs, tmutc,tmct);
+    status = smprintf(" L:%s  UTC:%s %s", 
+                          avgs,   tmutc,tmct);
     setstatus(status);
 
-    free(t0);
-    free(t1);
-    free(t2);
     free(avgs);
     free(tmutc);
     free(tmct);

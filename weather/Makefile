@@ -2,7 +2,7 @@
 
 include config.mk
 
-SRC = testwservice.c weather.c
+SRC = test.c weather.c
 OBJ = ${SRC:.c=.o}
 
 all: options ${NAME}
@@ -25,6 +25,6 @@ ${NAME}: ${OBJ}
 
 clean:
 	@echo cleaning
-	@rm -f testwservice testwservice.o weather.o ${NAME}-${VERSION}.tar.gz
+	@rm -f test test.o weather.o ${NAME}-${VERSION}.tar.gz
 
 .PHONY: all options clean dist install uninstall
