@@ -163,18 +163,19 @@ int main(void) {
   char *avgs;
   char *tmutc;
   char *tmct;
-  int temp = gettemperature();
+  int temp; 
   if (!(dpy = XOpenDisplay(NULL))) {
     fprintf(stderr, "dwmstatus: cannot open display.\n");
     return 1;
   }
 
   for (;; sleep(60)) {
+    temp = gettemperature();
     avgs = loadavg();
     tmutc = mktimes("%H:%M", tzutc);
     tmct = mktimes("KW %W %a %d %b %H:%M %Z %Y", tzct);
 
-    status = smprintf(" L:%s  UTC:%s %s %i°F", 
+    status = smprintf(" L:%s  UTC:%s %s %i°F ", 
                           avgs,   tmutc,tmct, temp);
     setstatus(status);
 
