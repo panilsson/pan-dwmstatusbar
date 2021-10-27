@@ -2,7 +2,6 @@
 #include "weather.h"
 
 int main(void){
-<<<<<<< HEAD
  /*char *forecast_raw = getforecast();
  //printf("%s", forecast_raw);
  json_t *forecast_json = json_pack(forecast_raw);
@@ -38,10 +37,6 @@ int main(void){
   printf("\n%i%cC\n", temp, degree);
 
  //json_t *periods = json_object_get(root,"periods");
-
-=======
- getforecast();
->>>>>>> parent of 0c85f29 (Testing jansson)
  return 0;
  // return printf("%d", getforecast());
 }
