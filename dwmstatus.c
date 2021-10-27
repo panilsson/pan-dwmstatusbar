@@ -183,7 +183,6 @@ int main(void) {
     free(tmutc);
     free(tmct);
     free(status);
-    free(temp);	
   }
 
   XCloseDisplay(dpy);

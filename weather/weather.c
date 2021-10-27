@@ -72,7 +72,7 @@ char *getforecast(){
   }
   
   //printf("%s\n", data.ptr);
-  free(data.ptr);
+  //free(data.ptr);
 
   cleanup_curl();
 
@@ -87,12 +87,14 @@ int gettemperature(){
   json_error_t error;
   json_t *root = json_loads(raw_json, 0, &error);
 
+  free(raw_json);
   if(!root){
-    printf("\nError during JSON load\n");
+    fprintf(stderr, "\nError during JSON load\n");
   }
 
   json_t *cur_forecast = json_object_get(json_object_get(root, "properties"), "periods");
   int temperature = json_integer_value(json_object_get(json_array_get(cur_forecast, 0), "temperature"));
+
   return temperature;
 
 }
