@@ -2,7 +2,7 @@
 
 include config.mk
 
-SRC = test.c weather.c
+SRC = weather.c
 OBJ = ${SRC:.c=.o}
 
 all: options ${NAME}

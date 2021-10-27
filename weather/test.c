@@ -3,7 +3,7 @@
 #include <jansson.h>
 
 int main(void){
- char *forecast_raw = getforecast();
+ /*char *forecast_raw = getforecast();
  //printf("%s", forecast_raw);
  json_t *forecast_json = json_pack(forecast_raw);
  
@@ -22,6 +22,8 @@ int main(void){
   periods = json_array_get(data, "periods");
   printf("%s %i", json_string_value(json_object_get(json_object_get(root,"properties"),"updated")), json_array_size(data));
 
+  json_t *cur_forcast = json_array_get(data, 0);
+
   for(int i = 0; i < json_array_size(data); i++){
     json_t *name, *windSpeed, *isDaytime, *temperature;
     json_t *tmp = json_array_get(data, i); 
@@ -29,7 +31,11 @@ int main(void){
     printf("%s",json_string_value(temperature));
     
 
-  }
+  }*/
+  
+  char degree = 248;
+  int temp = gettemperature();
+  printf("\n%i%cC\n", temp, degree);
 
  //json_t *periods = json_object_get(root,"periods");
 

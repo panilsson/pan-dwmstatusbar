@@ -149,21 +149,21 @@ char *getbattery(char *base) {
   return smprintf("%.0f%%%c", ((float)remcap / (float)descap) * 100, status);
 }
 
-char *gettemperature(char *base, char *sensor) {
+/*char *gettemperature(char *base, char *sensor) {
   char *co;
 
   co = readfile(base, sensor);
   if (co == NULL)
     return smprintf("");
   return smprintf("%02.0f°C", atof(co) / 1000);
-}
+}*/
 
 int main(void) {
   char *status;
   char *avgs;
   char *tmutc;
   char *tmct;
-
+  int temp = gettemperature();
   if (!(dpy = XOpenDisplay(NULL))) {
     fprintf(stderr, "dwmstatus: cannot open display.\n");
     return 1;
@@ -174,8 +174,8 @@ int main(void) {
     tmutc = mktimes("%H:%M", tzutc);
     tmct = mktimes("KW %W %a %d %b %H:%M %Z %Y", tzct);
 
-    status = smprintf(" L:%s  UTC:%s %s", 
-                          avgs,   tmutc,tmct);
+    status = smprintf(" L:%s  UTC:%s %s %i°F", 
+                          avgs,   tmutc,tmct, temp);
     setstatus(status);
 
     free(avgs);
