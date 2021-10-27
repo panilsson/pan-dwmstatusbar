@@ -48,7 +48,7 @@ void cleanup_curl(){
  * https://api.weather.gov
  * https://weather-gov.github.io/api/
  */
-int getforecast(){
+char* getforecast(){
   CURL *curl;
   CURLcode res;
   struct string data;
@@ -71,15 +71,11 @@ int getforecast(){
     curl_easy_cleanup(curl);
   }
   
-  printf("%s\n", data.ptr);
+  //printf("%s\n", data.ptr);
   free(data.ptr);
 
   cleanup_curl();
 
   printf("Completed and cleaned up curl.");
-  //free(data);
-  return 0;
-
-
-
+  return data.ptr;
 }

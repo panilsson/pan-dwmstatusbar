@@ -1,1 +1,1 @@
-int getforecast();
+char* getforecast();
