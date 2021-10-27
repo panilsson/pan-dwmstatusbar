@@ -2,7 +2,7 @@
 
 include config.mk
 
-SRC = ${NAME}.c
+SRC = dwmstatus.c weather/weather.c
 OBJ = ${SRC:.c=.o}
 
 all: options ${NAME}
