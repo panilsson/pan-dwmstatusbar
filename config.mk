@@ -15,7 +15,7 @@ WEATHERINC = ./weather/
 
 # includes and libs
 INCS = -I. -I/usr/include -I${X11INC} -I${CURLINC} -I${WEATHERINC}
-LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 -L${CURLLIB} -lcurl
+LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 -L${CURLLIB} -lcurl -l./weather/
 
 # flags
 CPPFLAGS = -DVERSION=\"${VERSION}\" -D_DEFAULT_SOURCE
