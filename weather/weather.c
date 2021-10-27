@@ -48,7 +48,7 @@ void cleanup_curl(){
  * https://api.weather.gov
  * https://weather-gov.github.io/api/
  */
-int getforecast(){
+char *getforecast(){
   CURL *curl;
   CURLcode res;
   struct string data;
@@ -71,15 +71,33 @@ int getforecast(){
     curl_easy_cleanup(curl);
   }
   
-  printf("%s\n", data.ptr);
+  //printf("%s\n", data.ptr);
   free(data.ptr);
 
   cleanup_curl();
 
   printf("Completed and cleaned up curl.");
   //free(data);
-  return 0;
+  return data.ptr;
+}
 
+int gettemperature(){
+  char *raw_json = getforecast();
+  //printf("%s", raw_json);
+  json_error_t error;
+  json_t *root = json_loads(raw_json, 0, &error);
 
+  if(!root){
+    printf("\nError during JSON load\n");
+  }
+
+  json_t *cur_forecast = json_object_get(json_object_get(root, "properties"), "periods");
+  int temperature = json_integer_value(json_object_get(json_array_get(cur_forecast, 0), "temperature"));
+  return temperature;
 
 }
+
+
+
+
+

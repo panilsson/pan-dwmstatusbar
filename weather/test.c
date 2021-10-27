@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "weather.h"
+#include <jansson.h>	
 
 int main(void){
  /*char *forecast_raw = getforecast();
@@ -32,9 +33,8 @@ int main(void){
 
   }*/
   
-  char degree = 248;
   int temp = gettemperature();
-  printf("\n%i%cC\n", temp, degree);
+  printf("\n%iF\n", temp);
 
  //json_t *periods = json_object_get(root,"periods");
  return 0;
